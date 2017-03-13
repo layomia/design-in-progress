@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313142242) do
+ActiveRecord::Schema.define(version: 20170313142843) do
 
   create_table "dips", force: :cascade do |t|
     t.datetime "created_at"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170313142242) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "dip_id"
   end
 
   create_table "users", force: :cascade do |t|
