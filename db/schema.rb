@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313011315) do
+ActiveRecord::Schema.define(version: 20170313142242) do
+
+  create_table "dips", force: :cascade do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
+    t.text     "#<ActiveRecord::ConnectionAdapters::TableDefinition:0x00000003318550>"
+    t.string   "name"
+  end
+
+  create_table "steps", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
@@ -21,9 +36,9 @@ ActiveRecord::Schema.define(version: 20170313011315) do
     t.string   "password_digest"
     t.string   "major"
     t.integer  "year"
-    t.boolean  "verified_email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "verified_email",  default: false
   end
 
 end
