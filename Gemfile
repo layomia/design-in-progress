@@ -32,7 +32,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 # Use Paperclip for file uploads
-gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem "paperclip"
 
 # Use AWS S3 for storage
 gem 'aws-sdk', '~> 2'
