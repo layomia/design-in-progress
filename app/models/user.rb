@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
                format: {with: VALID_EMAIL_REGEX}
                
     validates :major, presence: true
+    
+    validates :year, presence: true
 
     enum year: [ :first_year, :second_year, :third_year, :fourth_year, :fifth_year, :masters, :phd]
     
