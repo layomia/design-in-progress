@@ -31,6 +31,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use Paperclip for file uploads
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+
+# Use AWS S3 for storage
+gem 'aws-sdk', '~> 2'
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
