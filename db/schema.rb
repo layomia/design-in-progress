@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314164213) do
+ActiveRecord::Schema.define(version: 20170315030046) do
 
   create_table "dips", force: :cascade do |t|
     t.datetime "created_at"
@@ -19,7 +19,16 @@ ActiveRecord::Schema.define(version: 20170314164213) do
     t.text     "description"
     t.text     "#<ActiveRecord::ConnectionAdapters::TableDefinition:0x00000003318550>"
     t.string   "name"
+    t.integer  "user_id"
   end
+
+  create_table "dips_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "dip_id"
+  end
+
+  add_index "dips_users", ["dip_id"], name: "index_dips_users_on_dip_id"
+  add_index "dips_users", ["user_id"], name: "index_dips_users_on_user_id"
 
   create_table "steps", force: :cascade do |t|
     t.string   "name"
