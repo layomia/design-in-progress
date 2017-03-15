@@ -12,9 +12,7 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   
-  resources :steps
-  
-  get 'feed', to: 'dips#index'
+  get 'feed', to: 'steps#index'
   resources :dips
 
   # Example of regular route:

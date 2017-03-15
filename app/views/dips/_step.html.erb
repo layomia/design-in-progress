@@ -1,0 +1,6 @@
+<% step.step_elements.each do |element| %>
+    <div class="row">
+        <%= image_tag(element.image.url(:med)) %>
+    </div>
+<% end %>
+<%= step.description %>

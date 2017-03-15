@@ -2,7 +2,7 @@ class StepsController < ApplicationController
     @@dipInfo = nil
     
     def index
-        redirect_to feed_path
+        @steps = Step.all
     end
     
     def new

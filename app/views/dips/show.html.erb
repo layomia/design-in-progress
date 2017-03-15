@@ -1,4 +1,11 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+    <h5><%= @dip.name %></h5>
+    <h6>Dip by <%= link_to @dip.user.username, users_path(@dip.user) %></h6>
+</div>
 
-<%= link_to 'Edit', edit_dip_path(@dip) %> |
+<% @dip.steps.each do |step| %>
+    <%= render 'step', step: step %>
+<% end %>
+
 <%= link_to 'Back', dips_path %>

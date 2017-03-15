@@ -37,7 +37,7 @@ class DipsController < ApplicationController
         }
         end
         flash[:success] = "Dip was successfully created!"
-        redirect_to @dip
+        redirect_to feed_path
       else
         @dip.destroy
         render 'new'
