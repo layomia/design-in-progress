@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20170315033937) do
   create_table "dips", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "description"
     t.text     "#<ActiveRecord::ConnectionAdapters::TableDefinition:0x00000003318550>"
     t.string   "name"
     t.integer  "user_id"
@@ -36,10 +35,10 @@ ActiveRecord::Schema.define(version: 20170315033937) do
     t.integer  "step_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_file_name"
   end
 
   create_table "steps", force: :cascade do |t|
-    t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
