@@ -1,15 +1,19 @@
 class StepsController < ApplicationController
+    @@dipInfo = nil
+    
     def index
-        redirect_to root_path
-        #redirect_to feed
+        redirect_to feed_path
     end
     
     def new
         @step = Step.new
+        @dip = Dip.find(params[:dip])
+        @@dipInfo = @dip
     end
     
     def create
         @step = Step.new(step_params)
+        @step.dip = @@dipInfo
 
         if @step.save
             if params[:images].each { |image|
@@ -17,7 +21,7 @@ class StepsController < ApplicationController
             }
             end
             flash[:success] = "Step was successfully created!"
-            redirect_to step_path(@step)
+            redirect_to @@dipInfo
         else
             render 'new'
         end
@@ -25,6 +29,6 @@ class StepsController < ApplicationController
     
     private
     def step_params
-        params.require(:step).permit(:name, :description, :step_elements)
+        params.require(:step).permit(:description, :step_elements)
     end
 end

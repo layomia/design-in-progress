@@ -1,9 +1,10 @@
-<h4>New step for <%= @dip.name %></h4>
+<%= render 'shared/errors', obj: @dip %>
 
-<%= render 'shared/errors', obj: @step %>
-
-<%= form_for @step, :html => { multipart: true } do |f| %>
-
+<%= form_for @dip, :html => { multipart: true } do |f| %>
+  <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+    </div>
     <div class="field">
         <%= f.label :description %>
         <%= f.text_area :description %>
@@ -15,9 +16,8 @@
             <%= file_field_tag "images[]", type: :file, multiple: true %>
         </div>
     </div>
-    
-    <div class="field">
-        <%= f.submit %>
-    </div>
-    
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>

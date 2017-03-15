@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   
   resources :steps
+  
+  get 'feed', to: 'dips#index'
+  resources :dips
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
