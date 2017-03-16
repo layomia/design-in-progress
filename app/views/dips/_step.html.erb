@@ -3,8 +3,15 @@
         <%= carousel_for(step_images(step)) %>    
     </div>
     <div class="col col-md-5">
-        <%= step.description %>    
+        <% if logged_in? && step.dip.user == current_user %>
+            <%= link_to step_path(step), method: :delete, data: { confirm: 'Are you sure?'} do %>
+                <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+        <% end %>
     </div>
-    
 </div>
-
+<div class="row">
+    <divclass="col col-md-7">
+        <p><%= step.description %></p>
+    </div>
+</div>

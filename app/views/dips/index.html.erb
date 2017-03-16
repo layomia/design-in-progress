@@ -10,8 +10,8 @@
   <tbody>
     <% @dips.each do |dip| %>
       <tr>
-        <td><%= link_to 'Show', dip %></td>
-        <td><%= link_to 'Edit', edit_dip_path(dip) %></td>
+        <td><%= link_to dip.name, dip %></td>
+        <td><%= link_to 'Edit', edit_dip_path(dip) %> | </td>
         <td><%= link_to 'Destroy', dip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

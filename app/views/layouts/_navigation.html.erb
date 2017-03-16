@@ -20,8 +20,9 @@
       </form>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
+          <li><%= link_to "New Dip", new_dip_path %></li>
           <li><%= link_to "Me", user_path(current_user) %></li>
-          <li><%= link_to 'Log out', logout_path, method: :delete %></li>
+          <li><%= link_to "Log out", logout_path, method: :delete %></li>
         <% else %>
           <li><%= link_to 'Log in', login_path %></li>
           <li><%= link_to 'Sign up', signup_path %></li>

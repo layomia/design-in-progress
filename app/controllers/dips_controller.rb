@@ -5,7 +5,7 @@ class DipsController < ApplicationController
   # GET /dips
   # GET /dips.json
   def index
-    @dips = Dip.all
+    @dips = Dip.all.order("updated_at DESC")
   end
 
   # GET /dips/1
@@ -38,7 +38,7 @@ class DipsController < ApplicationController
         }
         end
         flash[:success] = "Dip was successfully created!"
-        redirect_to feed_path
+        redirect_to @dip
       else
         @dip.destroy
         render 'new'
@@ -66,10 +66,8 @@ class DipsController < ApplicationController
   # DELETE /dips/1.json
   def destroy
     @dip.destroy
-    respond_to do |format|
-      format.html { redirect_to dips_url, notice: 'Dip was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    flash[:success] = "Dip was successfully destroyed."
+    redirect_to feed_path
   end
   
   #helpers

@@ -1,11 +1,8 @@
-<p id="notice"><%= notice %></p>
-<div class="row">
-    <h5><%= @dip.name %></h5>
-    <h6>Dip by <%= link_to @dip.user.username, users_path(@dip.user) %></h6>
-</div>
+<h5><%= @dip.name %></h5>
+<h6>Dip by <%= link_to @dip.user.username, users_path(@dip.user) %></h6>
+<p><%= link_to "Add Step", {:controller => "steps", :action => "new", :dip => @dip} %></p>
+<p><%= link_to 'Delete Dip', @dip, method: :delete, data: { confirm: 'Are you sure?'} %></p>
 
-<% @dip.steps.each do |step| %>
-    <%= render 'step', step: step %>
+<% @dip.steps.order("created_at DESC").each do |step| %>
+        <%= render 'step', step: step %>
 <% end %>
-
-<%= link_to 'Back', dips_path %>
