@@ -1,6 +1,10 @@
-<% step.step_elements.each do |element| %>
-    <div class="row">
-        <%= image_tag(element.image.url(:med)) %>
+<div class="row">
+    <div class="col col-md-7">
+        <%= carousel_for(step_images(step)) %>    
     </div>
-<% end %>
-<%= step.description %>
+    <div class="col col-md-5">
+        <%= step.description %>    
+    </div>
+    
+</div>
+

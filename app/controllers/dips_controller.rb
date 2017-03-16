@@ -1,5 +1,6 @@
 class DipsController < ApplicationController
   before_action :set_dip, only: [:show, :edit, :update, :destroy]
+  helper_method :image_url, :step_images
 
   # GET /dips
   # GET /dips.json
@@ -70,6 +71,21 @@ class DipsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  #helpers
+  
+  def image_url(img)
+    temp = img.slice(2,img.length - 2).split('/')
+    temp[1] = "#{temp[1]}.#{temp[0]}"
+    temp.shift
+    "http://#{temp.join("/")}"
+  end
+  
+  def step_images(step)
+    attachments = step.step_elements.map(&:image)
+    attachments.map(&:url).map{|x| image_url(x)}
+  end
+    
 
   private
     def set_dip
