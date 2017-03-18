@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
     has_many :dips, :dependent => :destroy
-    has_and_belongs_to_many :dips
     
     # This method associates the attribute ":avatar" with a file attachment
     has_attached_file :avatar, styles: {

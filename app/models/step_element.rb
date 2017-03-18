@@ -8,7 +8,11 @@ class StepElement < ActiveRecord::Base
     :s3_credentials => {
       :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    }, styles: {
+      step_display: '960x540'
     }
     
+    validates_attachment :image, presence: true
     do_not_validate_attachment_file_type :image
+    validates :image, :unless => "image.queued_for_write[:original].blank?", dimensions: { width: 1920, height: 1080 }
 end

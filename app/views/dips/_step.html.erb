@@ -1,6 +1,10 @@
 <div class="row">
-    <div class="col col-md-7">
-        <%= carousel_for(step_images(step)) %>    
+    <div class="col col-md-12">
+        <% if step.step_elements.length > 1 %>
+            <%= carousel_for(step_images(step)) %>    
+        <% else %>
+            <%= image_tag(image_url(step.step_elements.first.image.url(:standard))) %>
+        <% end %>
     </div>
     <div class="col col-md-5">
         <% if logged_in? && step.dip.user == current_user %>
@@ -11,7 +15,9 @@
     </div>
 </div>
 <div class="row">
-    <divclass="col col-md-7">
+    <div class="col col-md-7">
         <p><%= step.description %></p>
+    </div>
+    <div class="col col-md-5">
     </div>
 </div>

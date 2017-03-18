@@ -16,6 +16,7 @@ class DipsController < ApplicationController
   # GET /dips/new
   def new
     @dip = Dip.new
+    @step = Step.new
   end
 
   # GET /dips/1/edit
@@ -28,15 +29,31 @@ class DipsController < ApplicationController
     @dip = Dip.new(dip_params)
     @dip.user = current_user
     
+    # image validation
+    if params[:images] == nil
+      flash[:danger] = "You must upload at least one image."
+      render 'new'
+      return
+    end
+    
     if @dip.save
       @step = Step.new(dip_params)
       @step.dip = @dip
 
       if @step.save
-        if params[:images].each { |image|
-          @step.step_elements.create(image: image)
-        }
+        params[:images].each do |image|
+          @step_element = StepElement.create(image: image)
+          @step_element.step = @step
+          
+          if not @step_element.save
+            flash[:danger] = "'image.original_filename' — #{@step_element.errors.full_messages.join(', ')}"
+            @dip.destroy
+            render 'new'
+            return
+          end
         end
+        
+        # Success
         flash[:success] = "Dip was successfully created!"
         redirect_to @dip
       else
@@ -47,7 +64,7 @@ class DipsController < ApplicationController
       render 'new'
     end
   end
-
+  
   # PATCH/PUT /dips/1
   # PATCH/PUT /dips/1.json
   def update
@@ -82,6 +99,22 @@ class DipsController < ApplicationController
   def step_images(step)
     attachments = step.step_elements.map(&:image)
     attachments.map(&:url).map{|x| image_url(x)}
+  end
+  
+  #helpers
+  
+  def image_url(img)
+    temp = img.slice(2,img.length - 2).split('/')
+    temp[1] = "#{temp[1]}.#{temp[0]}"
+    temp.shift
+    "http://#{temp.join("/")}"
+  end
+  
+  def step_images(step)
+    attachments = step.step_elements.map(&:image)
+    a = attachments.map(&:url).map{|x| image_url(x)}
+    puts a
+    return a
   end
     
 

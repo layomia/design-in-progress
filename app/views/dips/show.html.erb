@@ -1,7 +1,28 @@
-<h5><%= @dip.name %></h5>
-<h6>Dip by <%= link_to @dip.user.username, users_path(@dip.user) %></h6>
-<p><%= link_to "Add Step", {:controller => "steps", :action => "new", :dip => @dip} %></p>
-<p><%= link_to 'Delete Dip', @dip, method: :delete, data: { confirm: 'Are you sure?'} %></p>
+<div class="row">
+    <div class="col col-md-1">
+        <%= image_tag(image_url(@dip.user.avatar.url(:thumb))) %>
+    </div>
+    <div class="col col-md-11">
+        <h5><%= link_to @dip.user.username, users_path(@dip.user) %></h5>     
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-3"><h3><%= @dip.name %></h3></div>
+    <div class="col col-md-9"></div>
+</div>
+<div class="row">
+    <div class="col col-md-1">
+        <% if logged_in? and @dip.user == current_user %>
+            <p><%= link_to "Add Step", {:controller => "steps", :action => "new", :dip => @dip} %></p>
+        <% end %>
+    </div>
+    <div class="col col-md-1">
+        <% if logged_in? and @dip.user == current_user %>
+            <p><%= link_to 'Delete Dip', @dip, method: :delete, data: { confirm: 'Are you sure?'} %></p>
+        <% end %>
+    </div>
+    <div class="col col-md-10"></div>
+</div>
 
 <% @dip.steps.order("created_at DESC").each do |step| %>
         <%= render 'step', step: step %>

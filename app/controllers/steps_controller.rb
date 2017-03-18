@@ -19,17 +19,33 @@ class StepsController < ApplicationController
             redirect_to feed_path
         end
         
+        # image validation
+        if params[:images] == nil
+          flash[:danger] = "You must upload at least one image."
+          render 'new'
+          return
+        end
+        
         @step = Step.new(step_params)
         @step.dip = @@dipInfo
 
         if @step.save
-            if params[:images].each { |image|
-                @step.step_elements.create(image: image)
-            }
+            params[:images].each do |image|
+              @step_element = StepElement.create(image: image)
+              @step_element.step = @step
+              
+              if not @step_element.save
+                flash[:danger] = "'image.original_filename' — #{@step_element.errors.full_messages.join(', ')}"
+                @step.destroy
+                render 'new'
+                return
+              end
             end
-            flash[:success] = "Step was successfully created!"
-            @step.dip.touch
-            redirect_to @@dipInfo
+            
+            # Success
+            flash[:success] = "Step was successfully added!"
+            redirect_to @step.dip
+            
         else
             render 'new'
         end
