@@ -1,17 +1,1 @@
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @dips.each do |dip| %>
-      <tr>
-        <td><%= link_to dip.name, dip %></td>
-        <td><%= link_to 'Edit', edit_dip_path(dip) %> | </td>
-        <td><%= link_to 'Destroy', dip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'dips', dips: @dips %>

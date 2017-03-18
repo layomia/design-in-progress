@@ -1,0 +1,16 @@
+<% dips.each do |dip| %>
+    <div class="row">
+        <div class="col col-md-1">
+            <%= image_tag(image_url(dip.user.avatar.url(:thumb))) %>
+        </div>
+        <div class="col col-md-11">
+            <h5><%= link_to dip.user.username, dip.user %></h5>     
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-1">
+            <h6><%= link_to 'View Dip', dip %></h6>
+        </div>
+    </div>
+    <%= render 'steps/step', step: dip.steps.order('created_at ASC').first, feed: 'true' %>
+<% end %>

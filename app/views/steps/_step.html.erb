@@ -6,13 +6,15 @@
             <%= image_tag(image_url(step.step_elements.first.image.url(:md_display))) %>
         <% end %>
     </div>
-    <div class="col col-md-2">
-        <% if logged_in? && step.dip.user == current_user %>
-            <%= link_to step_path(step), method: :delete, data: { confirm: 'Are you sure?'} do %>
-                <span class="glyphicon glyphicon-trash"></span>
+    <% if feed == 'false' %>
+        <div class="col col-md-2">
+            <% if logged_in? && step.dip.user == current_user %>
+                <%= link_to step_path(step), method: :delete, data: { confirm: 'Are you sure?'} do %>
+                    <span class="glyphicon glyphicon-trash"></span>
+                <% end %>
             <% end %>
-        <% end %>
-    </div>
+        </div>
+    <% end %>
 </div>
 <div class="row">
     <div class="col col-md-7">
