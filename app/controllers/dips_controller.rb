@@ -113,7 +113,9 @@ class DipsController < ApplicationController
   def step_images(step)
     attachments = step.step_elements.map(&:image)
     a = attachments.map(&:url).map{|x| image_url(x)}
+    puts 'looking at'
     puts a
+    puts 'this shit'
     return a
   end
     

@@ -7,6 +7,9 @@ class StepsController < ApplicationController
         @steps = Step.all
     end
     
+    def show
+    end
+    
     def new
         @step = Step.new
         @dip = Dip.find(params[:dip])
@@ -56,11 +59,12 @@ class StepsController < ApplicationController
         if @step.dip.steps.length == 1
             @step.dip.destroy
             flash[:success] = "Step and Dip successfully destroyed."
+            redirect_to feed_path
         else
             @step.destroy
             flash[:success] = "Step was successfully destroyed."
+            redirect_to @step.dip
         end
-        redirect_to feed_path
     end
     
     private

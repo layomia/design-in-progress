@@ -25,5 +25,5 @@
 </div>
 
 <% @dip.steps.order("created_at DESC").each do |step| %>
-        <%= render 'step', step: step %>
+        <%= render 'steps/step', step: step %>
 <% end %>
