@@ -1,6 +1,5 @@
 class DipsController < ApplicationController
   before_action :set_dip, only: [:show, :edit, :update, :destroy]
-  helper_method :image_url, :step_images
 
   # GET /dips
   # GET /dips.json
@@ -84,42 +83,11 @@ class DipsController < ApplicationController
   def destroy
     @dip.destroy
     flash[:success] = "Dip was successfully destroyed."
+    puts 'damn params'
+    puts params
     redirect_to feed_path
   end
   
-  #helpers
-  
-  def image_url(img)
-    temp = img.slice(2,img.length - 2).split('/')
-    temp[1] = "#{temp[1]}.#{temp[0]}"
-    temp.shift
-    "http://#{temp.join("/")}"
-  end
-  
-  def step_images(step)
-    attachments = step.step_elements.map(&:image)
-    attachments.map(&:url).map{|x| image_url(x)}
-  end
-  
-  #helpers
-  
-  def image_url(img)
-    temp = img.slice(2,img.length - 2).split('/')
-    temp[1] = "#{temp[1]}.#{temp[0]}"
-    temp.shift
-    "http://#{temp.join("/")}"
-  end
-  
-  def step_images(step)
-    attachments = step.step_elements.map(&:image)
-    a = attachments.map(&:url).map{|x| image_url(x)}
-    puts 'looking at'
-    puts a
-    puts 'this shit'
-    return a
-  end
-    
-
   private
     def set_dip
       @dip = Dip.find(params[:id])

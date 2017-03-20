@@ -1,12 +1,14 @@
 <div class="row">
     <div class="col col-md-8">
-        <% if step.step_elements.length > 1 %>
-            <%= carousel_for(step_images(step)) %>    
-        <% else %>
-            <%= image_tag(image_url(step.step_elements.first.image.url(:md_display))) %>
-        <% end %>
+        <div class="step_image_parent" style="position:relative">
+            <% if step.step_elements.length > 1 %>
+                <%= carousel_for(step_images(step)) %>    
+            <% else %>
+                <%= image_tag(image_url(step.step_elements.first.image.url(:md_display))) %>
+            <% end %>
+        </div>
     </div>
-    <% if feed == 'false' %>
+    <% if source == 'dip' %>
         <div class="col col-md-2">
             <% if logged_in? && step.dip.user == current_user %>
                 <%= link_to step_path(step), method: :delete, data: { confirm: 'Are you sure?'} do %>

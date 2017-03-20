@@ -10,6 +10,7 @@ class StepElement < ActiveRecord::Base
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     },
     :styles => {
+      :sm_display => '370x208#',
       :md_display => '740x416'
     }
     

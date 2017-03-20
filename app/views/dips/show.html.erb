@@ -3,7 +3,7 @@
         <%= image_tag(image_url(@dip.user.avatar.url(:thumb))) %>
     </div>
     <div class="col col-md-11">
-        <h5><%= link_to @dip.user.username, users_path(@dip.user) %></h5>     
+        <h5><%= link_to @dip.user.username, @dip.user %></h5>     
     </div>
 </div>
 <div class="row">
@@ -25,5 +25,5 @@
 </div>
 
 <% @dip.steps.order("created_at DESC").each do |step| %>
-        <%= render 'steps/step', step: step, feed: 'false' %>
+        <%= render 'steps/step', step: step, source: 'dip' %>
 <% end %>

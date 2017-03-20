@@ -1,0 +1,10 @@
+---
+:StepElement:
+  :image:
+  - :md_display
+  - :sm_display
+:User:
+  :avatar:
+  - :medium
+  - :square
+  - :thumb

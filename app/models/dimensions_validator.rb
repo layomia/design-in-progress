@@ -4,12 +4,6 @@ class DimensionsValidator < ActiveModel::EachValidator
       dimensions = Paperclip::Geometry.from_file(value.queued_for_write[:original].path)
       width = options[:width]
       height = options[:height]
-      
-      puts width
-      puts height
-      
-      puts dimensions.width
-      puts dimensions.height
 
       record.errors[attribute] << "Width must be #{width}px" unless dimensions.width == width
       record.errors[attribute] << "Height must be #{height}px" unless dimensions.height == height

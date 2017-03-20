@@ -3,10 +3,10 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :image_url, :step_images, :dip_latest_step, :step_primary_image
   
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
   end
   
   def logged_in?
@@ -18,5 +18,25 @@ class ApplicationController < ActionController::Base
       flash[:danger] = "You must be logged in to perform that action"
       redirect_to root_path
     end
+  end
+
+  def image_url(img)
+    temp = img.slice(2,img.length - 2).split('/')
+    temp[1] = "#{temp[1]}.#{temp[0]}"
+    temp.shift
+    "https://#{temp.join("/")}"
+  end
+  
+  def step_images(step)
+    attachments = step.step_elements.map(&:image)
+    attachments.map(&:url).map{|x| image_url(x)}
+  end
+  
+  def dip_latest_step(dip)
+    dip.steps.order('created_at DESC').first
+  end
+  
+  def step_primary_image(step)
+    step.step_elements.first.image.url(:small_display)
   end
 end

@@ -1,4 +1,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-[class^="span"] { background-color: rgba(255, 0, 0, 0.3); }
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
+.carousel {
+    width: 740px;
+}
