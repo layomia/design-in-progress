@@ -1,0 +1,5 @@
+<div class="comments-frame" id="<%= commentable.model_name.name + commentable.id.to_s %>">
+    <% commentable.comments.where(relX: relX, relY: relY).each do |comment| %>
+        <%= render 'comments/comment', comment: comment %>
+    <% end %>
+</div>

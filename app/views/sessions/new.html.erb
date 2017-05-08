@@ -1,18 +1,27 @@
-<h4>Log in</h4>
-<%= form_for(:sessions, :html => {class: "form-horizontal", role: "form"}, url: login_path) do |f| %>
-    <div class="field">
-        <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true %>
-    </div>
+<div class="page-content">
+    <div class="row page-title-bg">
+        <div class="page-title">
+        	Login
+        </div>
+    </div>  
     
-    <div class="field">
-        <%= f.label :password %>
-        <%= f.password_field :password, autocomplete: "off" %>
+    <div class="page-content-main">
+        <%= form_for(:sessions, :html => { class:"contact-form row", role: "form"}, url: login_path) do |f| %>
+            <div class="form-field col x-50">
+                <%= f.email_field :email, autofocus: true, class: "input-text js-input" %>
+                <%= f.label :email, class: "label" %>
+            </div>
+            
+            <div class="form-field col x-50">
+                <%= f.password_field :password, autocomplete: "off", class: "input-text js-input" %>
+                <%= f.label :password, class: "label" %>
+            </div>
+            
+            <div class="row" id="review-actions" style="text-align: center">
+        		<div class="review-action-bg">
+        			<%= f.submit "Log in", class: "review-action looks-great" %>
+        		</div>
+        	</div>
+        <% end %>
     </div>
-    
-    <div class="field">
-        <%= f.submit "Log in" %>
-    </div>
-<% end %>
-
-<%= link_to "Home" %>
+</div>

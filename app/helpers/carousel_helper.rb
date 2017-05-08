@@ -46,7 +46,8 @@ module CarouselHelper
         class: (is_active ? 'item active' : 'item'),
       }
 
-      content_tag(:div, image_tag(image), options)
+      #puts content_tag(:div, image_tag(image, class: "step-image"), options)
+      content_tag(:div, image_tag(image, class: "step-image"), options)
     end
 
     def controls

@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Work+Sans:regular,extrabold">
 </head>
 <body>
   
@@ -13,7 +14,7 @@
     <%= render 'layouts/messages' %>
   </div>
 
-  <div class="container">
+  <div class="container-fluid">
     <%= yield %>
   </div>
   

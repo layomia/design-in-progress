@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col col-md-12">
+        <%= form_for [commentable, Comment.new], remote: true do |f| %>
+            <%= f.hidden_field :relX, :value => relX %>
+            <%= f.hidden_field :relY, :value => relY %>
+            <%= f.text_area :body, class: "textarea comment-textbox", placeholder: "Add a comment", id:"#{ commentable.model_name.name + 'form' + commentable.id.to_s }" %>
+            <div class="comment-submit">
+                <%= f.submit %>
+            </div>
+        <% end %>
+    </div>
+</div>

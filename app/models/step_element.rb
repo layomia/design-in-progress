@@ -1,5 +1,6 @@
 class StepElement < ActiveRecord::Base
     belongs_to :step
+    has_many :comments, as: :commentable
     
     has_attached_file :image,
     :storage => :s3,

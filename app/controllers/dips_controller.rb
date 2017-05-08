@@ -4,6 +4,7 @@ class DipsController < ApplicationController
   # GET /dips
   # GET /dips.json
   def index
+    redirect_to root_path if !logged_in?
     @dips = Dip.all.order("updated_at DESC")
   end
 

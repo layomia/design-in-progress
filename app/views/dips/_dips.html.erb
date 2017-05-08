@@ -1,16 +1,27 @@
 <% dips.each do |dip| %>
-    <div class="row">
-        <div class="col col-md-1">
-            <%= image_tag(image_url(dip.user.avatar.url(:thumb))) %>
+    <div class="dip-wrapper">
+        <div class="row">
+            <div class="col col-md-1" style="text-align: center">
+                <%= image_tag(image_url(dip.user.avatar.url(:thumb)), class: "user-avatar") %>
+            </div>
+            <div class="col col-md-10">
+                <div class="user-details-text">
+                    <h3><%= link_to dip.user.username, user_path(dip.user.id) %></h3>
+                    <h4><%= "#{dip.user.year.humanize} #{dip.user.major}" %></h4>
+                    <p>posted <%= distance_of_time_in_words_to_now(dip.steps.last.created_at) %> ago</p>
+                </div>
+            </div>
         </div>
-        <div class="col col-md-11">
-            <h5><%= link_to dip.user.username, user_path(dip.user.id) %></h5>     
+        <div class="row">
+            <div class="col col-md-1"></div>
+            <div class="col col-md-1">
+                <div class="view-steps-wrapper">
+                    <div class="view-steps">
+                        <%= link_to 'view steps', dip %>
+                    </div>
+                </div>
+            </div>
         </div>
+        <%= render 'steps/step', step: dip.steps.order('created_at DESC').first, source: 'feed' %>
     </div>
-    <div class="row">
-        <div class="col col-md-1">
-            <h6><%= link_to 'View Dip', dip %></h6>
-        </div>
-    </div>
-    <%= render 'steps/step', step: dip.steps.order('created_at DESC').first, source: 'feed' %>
 <% end %>

@@ -1,51 +1,52 @@
-<div class="row">
-    <div class="col col-md-1">
-        <%= image_tag(image_url(@user.avatar.url(:thumb))) %>
-    </div>
-    <div class="col col-md-2">
-        <h4><%= @user.first_name %> <%= @user.last_name %></h4>
-    </div>
-    <div class="col col-md-7"></div>
-    <div class="col col-md-2">
-        <% if logged_in? && @user == current_user %>
-            <%= link_to 'Edit Profile', edit_user_path(@user) %>
+<div class="page-content">
+    <div class="page-content-main">
+        <div class="row" style="margin-bottom:40px">
+            <div class="col col-md-1" style="text-align: center">
+                <%= image_tag(image_url(@user.avatar.url(:thumb)), class: "user-avatar") %>
+            </div>
+            <div class="col col-md-10">
+                <div class="user-details-text">
+                    <h3 style="color:#000000"><%= @user.username %></h3>
+                    <h4><%= "#{@user.year.humanize} #{@user.major}" %></h4>
+                    <% if logged_in? && @user == current_user %>
+                        <%= link_to 'edit profile', edit_user_path(@user) %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        
+        <% @user.dips.each_slice(2) do |dips| %>
+            <div class="row">
+                <% dips.each do |dip| %>
+                    <div class="col col-md-6">
+                        <div class="row">
+                            <div class="col col-md-5">
+                                <h6><%= dip.name %></h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-md-1" style="margin:10px 0px">
+                                <div class="view-steps">
+                                    <%= link_to 'view steps', dip %>
+                                </div>
+                            </div>
+                            <div class="col col-md-1">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-md-6">
+                                <%= image_tag(image_url(step_primary_image(dip_latest_step(dip))), :size => "530x298") %>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-md-6">
+                                <p><%=  truncate(dip_latest_step(dip).description, :length => 50) %></p>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>    
+            </div>
+            <hr/>
         <% end %>
     </div>
 </div>
-
-<% @user.dips.each_slice(2) do |dips| %>
-    <div class="row">
-        <% dips.each do |dip| %>
-            <div class="col col-md-6">
-                <div class="row">
-                    <div class="col col-md-5">
-                        <h6><%= dip.name %></h6>
-                    </div>
-                    <div class="col col-md-1">
-                        <% if logged_in? && dip.user == current_user %>
-                            <%= link_to dip, method: :delete, source: 'profile', data: { confirm: 'Are you sure?'} do %>
-                                <span class="glyphicon glyphicon-trash"></span>
-                            <% end %>
-                        <% end %>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-md-6">
-                        <h6><%= link_to 'View Dip', dip %></h6>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-md-6">
-                        <%= image_tag(image_url(step_primary_image(dip_latest_step(dip))), :size => "370x208") %>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-md-6">
-                        <p><%=  truncate(dip_latest_step(dip).description, :length => 50) %></p>
-                    </div>
-                </div>
-            </div>
-        <% end %>    
-    </div>
-    <hr/>
-<% end %>

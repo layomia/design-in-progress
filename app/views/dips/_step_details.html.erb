@@ -1,0 +1,30 @@
+<div class="row">
+	<button id="step-back">
+	    Back
+	</button>
+</div>
+<div>
+	<div class="row dip-details-form">
+		<div class="col col-md-7">
+			<img id="stepLeadImage" src="#" alt="stepLeadImage" />
+		</div>
+		<div class="col col-md-4">
+			<form enctype="multipart/form-data" class="contact-form row">
+				<div class="dip-detail-field">
+					<label class="dip-detail-label">Name</label>
+					<%= f.text_field :name, class: "dip-detail-input" %>
+				</div>
+				<div class="dip-detail-field">
+					<label class="dip-detail-label">Description</label>
+					<%= f.text_area :description, class: "dip-detail-input textarea" %>
+				</div>
+				<div class="row" id="review-actions" style="text-align: center">
+					<div class="review-action-bg">
+						<button ng-click="dipsDetails.createDip()" class="review-action looks-great">Looks great!
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

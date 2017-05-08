@@ -1,0 +1,8 @@
+var $lastComment;
+var $comments_list = $('#<%= @comment.commentable_type + @comment.commentable.id.to_s %>');
+console.log('<%= escape_javascript(render 'comments/comment', comment: @comment) %>');
+$comments_list.append('<%= escape_javascript(render 'comments/comment', comment: @comment) %>');
+$lastComment = $comments_list.children().last();
+$lastComment.addClass('last-comment').delay(2000).queue(function() {
+    $(this).removeClass('last-comment') 
+});

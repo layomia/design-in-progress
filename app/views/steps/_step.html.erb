@@ -1,27 +1,41 @@
-<div class="row">
-    <div class="col col-md-8">
-        <div class="step_image_parent" style="position:relative">
-            <% if step.step_elements.length > 1 %>
-                <%= carousel_for(step_images(step)) %>    
-            <% else %>
-                <%= image_tag(image_url(step.step_elements.first.image.url(:md_display))) %>
-            <% end %>
+<div class="row <%= 'dip-wrapper' if source=='dip' %>">
+    <div class="col col-md-1"></div>
+    <div class="col col-md-8" style="max-width: 800px">
+        <div class="row step-content-wrapper" style="text-align: center">
+            <div class="col col-md-8">
+                <div class="step-image-parent" style="position:relative">
+                    <% if step.step_elements.length > 1 %>
+                        <%= carousel_for(step_images(step)) %>    
+                    <% else %>
+                        <%= image_tag(image_url(step.step_elements.first.image.url(:md_display)), class: "step-image", id: "sei#{step.step_elements.first.id}", onClick: "handleImageClick(event, '#{step.step_elements.first.id}')") %>
+                        <div style="display:none">
+                            <%= link_to "sec_prompt", sec_prompt_path, remote: true, id: "sei-link-#{step.step_elements.first.id}" %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
         </div>
-    </div>
-    <% if source == 'dip' %>
-        <div class="col col-md-2">
-            <% if logged_in? && step.dip.user == current_user %>
-                <%= link_to step_path(step), method: :delete, data: { confirm: 'Are you sure?'} do %>
-                    <span class="glyphicon glyphicon-trash"></span>
+        <div class="row step-content-wrapper">
+            <div class="col col-md-8" style="max-width: 800px">
+                <h4>Description</h4>
+                <div class="step-description">
+                    <%= step.description %>
+                </div>
+                <!--
+                <% if source == 'dip' %>
+                    <div class="col col-md-1">
+                        <% if logged_in? && step.dip.user == current_user %>
+                            <%= link_to step_path(step), method: :delete, data: { confirm: 'Are you sure?'} do %>
+                                <span class="glyphicon glyphicon-trash"></span>
+                            <% end %>
+                        <% end %>
+                    </div>
                 <% end %>
-            <% end %>
+                -->
+            </div>
         </div>
-    <% end %>
-</div>
-<div class="row">
-    <div class="col col-md-7">
-        <p><%= step.description %></p>
     </div>
-    <div class="col col-md-5">
-    </div>
+    <div style="margin-top:80px">
+        <%= render 'comments/comment_block', commentable: step, commentable_type: "step", relX: nil, relY: nil %>
+    </div>    
 </div>

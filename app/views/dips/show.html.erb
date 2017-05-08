@@ -1,29 +1,33 @@
-<div class="row">
-    <div class="col col-md-1">
-        <%= image_tag(image_url(@dip.user.avatar.url(:thumb))) %>
-    </div>
-    <div class="col col-md-11">
-        <h5><%= link_to @dip.user.username, @dip.user %></h5>     
-    </div>
-</div>
-<div class="row">
-    <div class="col col-md-3"><h3><%= @dip.name %></h3></div>
-    <div class="col col-md-9"></div>
-</div>
-<div class="row">
-    <div class="col col-md-1">
-        <% if logged_in? and @dip.user == current_user %>
-            <p><%= link_to "Add Step", {:controller => "steps", :action => "new", :dip => @dip} %></p>
+<div class="page-content">
+    <div class="page-content-main">
+        <div class="row" style="margin-bottom:40px">
+            <div class="row">
+                <div class="col col-md-1" style="text-align: center">
+                    <%= image_tag(image_url(@dip.user.avatar.url(:thumb)), class: "user-avatar") %>
+                </div>
+                <div class="col col-md-10">
+                    <div class="user-details-text">
+                        <h3><%= link_to @dip.user.username, user_path(@dip.user.id) %></h3>
+                        <h4><%= "#{@dip.user.year.humanize} #{@dip.user.major}" %></h4>
+                        <p>posted <%= distance_of_time_in_words_to_now(@dip.steps.last.created_at) %> ago</p>
+                    </div>
+                </div>
+            </div>
+            <% if logged_in? and @dip.user == current_user %>
+                <div class="row">
+                    <div class="col col-md-1"></div>
+                    <div class="col col-md-2">
+                        <p><%= link_to "Add Step", {:controller => "steps", :action => "new", :dip => @dip} %></p>
+                    </div>
+                    <div class="col col-md-2">
+                        <p><%= link_to 'Delete Dip', @dip, method: :delete, data: { confirm: 'Are you sure?'} %></p>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+        
+        <% @dip.steps.order("created_at DESC").each do |step| %>
+                <%= render 'steps/step', step: step, source: 'dip' %>
         <% end %>
     </div>
-    <div class="col col-md-1">
-        <% if logged_in? and @dip.user == current_user %>
-            <p><%= link_to 'Delete Dip', @dip, method: :delete, data: { confirm: 'Are you sure?'} %></p>
-        <% end %>
-    </div>
-    <div class="col col-md-10"></div>
 </div>
-
-<% @dip.steps.order("created_at DESC").each do |step| %>
-        <%= render 'steps/step', step: step, source: 'dip' %>
-<% end %>

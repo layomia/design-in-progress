@@ -12,9 +12,16 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   
+  get 'sec_prompt', to: 'application#step_element_comment_prompt'
+  
   get 'feed', to: 'dips#index'
   resources :dips
-  resources :steps
+  resources :steps do
+    resources :comments, module: :steps
+  end
+  resources :step_elements do
+    resources :comments, module: :step_elements
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

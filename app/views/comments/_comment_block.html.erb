@@ -1,0 +1,13 @@
+<% if commentable_type == "step_element" %>
+    <div style="<%= commentable_type == "step_element" ? "position:absolute;margin-top:#{relY}px;margin-left:#{relX}px" : "" %>">
+        <%= image_tag("commentDot.png") %>
+    </div>
+<% end %>
+<div class="col col-md-<%= commentable_type == "step" ? "3" : "5" %> step-comments-frame"
+     style="<%= commentable_type == "step_element" ? "position:absolute;margin-top:#{(relY.to_i + 12).to_s}px;margin-left:#{(relX.to_i + 10).to_s}px" : "" %>"
+>
+        <%= render 'comments/comments', commentable: commentable, relX: relX, relY: relY %>
+        <div id="comment-form">
+            <%= render 'comments/form', commentable: commentable, relX: relX, relY: relY %>
+        </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="row image-upload">
+	<div class="col col-md-2"></div>
+	<div class="col col-md-8">
+		<div  class="drop-box" >
+			<div class="upload-prompt">
+				<div>
+					Upload your Step images here.
+				</div>
+			</div>
+			
+			<div style="margin-top:15px;margin-left:38%">
+				<%= file_field_tag "images[]", type: :file, multiple: true, id: "step-images" %>
+			</div>
+		</div>
+	</div>
+	<div class="col col-md-2"></div>
+</div>
+<div class="row" id="review-actions" style="text-align: center">
+	<div class="review-action-bg">
+		<button class="review-action dip-next-button edit-form" id="step-next">
+			Next
+		</button>
+	</div>
+</div>
+<div class="row upload-instructions">
+	<div class="col col-md-1"></div>
+	<div class="col col-md-10">
+		3 image. is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', 
+	</div>
+	<div class="col col-md-1"></div>
+</div>

@@ -1,0 +1,8 @@
+var $stepElemImg = $("#sei<%= @step_element.id %>");
+var $stepElemImgParent = $stepElemImg.closest(".step-image-parent");
+$stepElemImgParent.prepend('<div class="se-comment-block open"><%= escape_javascript( render "comments/comment_block", commentable: @step_element, commentable_type: "step_element", relX: @relX, relY: @relY ) %></div>')
+$(".comment-textbox").on("keydown", handleCommentKeydown);
+$(document)
+    .on('click', closeCommentPrompts)
+    .on('keydown', handleKeyDown)
+    .on('keypress', handleKeyPress);

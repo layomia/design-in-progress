@@ -29,6 +29,7 @@ class ApplicationController < ActionController::Base
   
   def step_images(step)
     attachments = step.step_elements.map(&:image)
+    puts attachments.map(&:url).map{|x| image_url(x)}
     attachments.map(&:url).map{|x| image_url(x)}
   end
   
@@ -38,5 +39,20 @@ class ApplicationController < ActionController::Base
   
   def step_primary_image(step)
     step.step_elements.first.image.url(:small_display)
+  end
+  
+  def step_element_comment_prompt
+    @step_element = StepElement.find(params[:id])
+    @relX = params[:relX]
+    @relY = params[:relY]
+    
+    respond_to do |format|
+      format.html do
+          flash[:danger] = 'You need JavaScript enabled to add a comment'
+          redirect_to root_path
+      end
+      format.js
+  end
+    
   end
 end
